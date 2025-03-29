@@ -9,6 +9,10 @@ services:
       - backend
     networks:
       - mynetwork
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: ['npm', 'start']
 
   backend:
     build: ./backend
@@ -20,6 +24,10 @@ services:
       DATABASE_URL: postgres://postgres:postgres@db:5432/mydb
     networks:
       - mynetwork
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: ['npm', 'run', 'dev']
 
   db:
     image: postgres:16
