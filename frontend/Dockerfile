@@ -2,12 +2,12 @@
 FROM node:18 AS builder
 WORKDIR /app
 
-# Copiar package.json y package-lock.json para instalar dependencias
-COPY frontend/package*.json ./
+# Copiar package.json y package-lock.json desde la misma carpeta donde está el Dockerfile
+COPY package*.json ./
 RUN npm ci
 
-# Copiar TODO el código fuente del frontend
-COPY frontend ./
+# Copiar TODO el código fuente del frontend (desde la misma carpeta)
+COPY . .
 
 # Construir la aplicación Next.js
 RUN npm run build

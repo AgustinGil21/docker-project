@@ -8,7 +8,7 @@ services:
     depends_on:
       - backend
     networks:
-      - mynetwork
+      - docker-project
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -21,9 +21,9 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/mydb
+      DATABASE_URL: postgres://agustin:hola1234@db:5432/docker_project_db
     networks:
-      - mynetwork
+      - docker-project
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -36,16 +36,17 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
+      POSTGRES_USER: agustin
+      POSTGRES_PASSWORD: hola1234
+      POSTGRES_DB: docker_project_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - mynetwork
+      - docker-project
 
 volumes:
   postgres_data:
 
 networks:
-  mynetwork:
+  docker-project:
+    driver: bridge
